@@ -37,6 +37,12 @@ export type RunOptions = {
    * Environment variables to pass to the child process
    */
   env?: NodeJS.ProcessEnv
+
+  /**
+   * Whether or not to reject the promise. Defaults
+   * false
+   */
+  reject?: boolean
 }
 
 /**

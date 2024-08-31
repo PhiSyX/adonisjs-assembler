@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import type { ExecaChildProcess } from 'execa'
+import type { ResultPromise } from 'execa'
 import { type Logger, cliui } from '@poppinss/cliui'
 
 import { run } from './helpers.js'
@@ -33,7 +33,7 @@ export class AssetsDevServer {
   #cwd: URL
   #logger = ui.logger
   #options?: AssetsBundlerOptions
-  #devServer?: ExecaChildProcess<string>
+  #devServer?: ResultPromise
 
   /**
    * Getting reference to colors library from logger

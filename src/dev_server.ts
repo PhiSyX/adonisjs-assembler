@@ -12,7 +12,7 @@ import { relative } from 'node:path'
 import type tsStatic from 'typescript'
 import prettyHrtime from 'pretty-hrtime'
 import { fileURLToPath } from 'node:url'
-import { type ExecaChildProcess } from 'execa'
+import { type ResultPromise } from 'execa'
 import { cliui, type Logger } from '@poppinss/cliui'
 import type { Watcher } from '@poppinss/chokidar-ts'
 
@@ -75,7 +75,7 @@ export class DevServer {
   /**
    * Reference to the child process
    */
-  #httpServer?: ExecaChildProcess<string>
+  #httpServer?: ResultPromise
 
   /**
    * Reference to the watcher
@@ -223,7 +223,7 @@ export class DevServer {
     this.#httpServer
       .then((result) => {
         if (mode === 'nonblocking') {
-          this.#onClose?.(result.exitCode)
+          this.#onClose?.(result.exitCode!)
           this.#watcher?.close()
           this.#assetsServer?.stop()
         } else {

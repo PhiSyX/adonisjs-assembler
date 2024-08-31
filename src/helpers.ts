@@ -28,7 +28,9 @@ import debug from './debug.js'
  */
 const DEFAULT_NODE_ARGS = [
   // Use ts-node/esm loader. The project must install it
-  '--loader=ts-node/esm',
+  process.versions.tsNodeMaintained
+    ? '--import=ts-node-maintained/register/esm'
+    : '--loader=ts-node/esm',
   // Enable source maps, since TSNode source maps are broken
   '--enable-source-maps',
 ]
@@ -77,6 +79,7 @@ export function runNode(cwd: string | URL, options: RunOptions) {
     windowsHide: false,
     localDir: cwd,
     cwd,
+    reject: options.reject ?? false,
     buffer: false,
     stdio: options.stdio || 'inherit',
     env: {

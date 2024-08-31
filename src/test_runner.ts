@@ -9,7 +9,7 @@
 
 import picomatch from 'picomatch'
 import type tsStatic from 'typescript'
-import { type ExecaChildProcess } from 'execa'
+import { type ResultPromise } from 'execa'
 import { cliui, type Logger } from '@poppinss/cliui'
 import type { Watcher } from '@poppinss/chokidar-ts'
 
@@ -87,7 +87,7 @@ export class TestRunner {
   /**
    * Reference to the test script child process
    */
-  #testScript?: ExecaChildProcess<string>
+  #testScript?: ResultPromise
 
   /**
    * Reference to the watcher
@@ -236,7 +236,7 @@ export class TestRunner {
     this.#testScript
       .then((result) => {
         if (mode === 'nonblocking') {
-          this.#onClose?.(result.exitCode)
+          this.#onClose?.(result.exitCode!)
           this.close()
         }
       })

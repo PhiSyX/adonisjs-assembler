@@ -69,7 +69,7 @@ test.group('Child process', () => {
     assert.equal(childProcess.exitCode, 0)
     assert.deepEqual(payload, {
       args: [
-        '--loader=ts-node/esm',
+        '--import=ts-node-maintained/register/esm',
         '--enable-source-maps',
         process.allowedNodeEnvironmentFlags.has('--disable-warning')
           ? '--disable-warning=ExperimentalWarning'
@@ -116,7 +116,12 @@ test.group('Child process', () => {
     `
     )
 
-    const childProcess = runNode(fs.basePath, { script: 'foo.ts', scriptArgs: [], nodeArgs: [] })
+    const childProcess = runNode(fs.basePath, {
+      script: 'foo.ts',
+      scriptArgs: [],
+      nodeArgs: [],
+      reject: true,
+    })
     try {
       await childProcess
     } catch {
