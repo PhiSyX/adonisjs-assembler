@@ -174,6 +174,7 @@ export class DevServer {
       script: this.#scriptFile,
       env: { PORT: port, ...this.#options.env },
       nodeArgs: this.#options.nodeArgs,
+      reject: true,
       scriptArgs: this.#options.scriptArgs,
     })
 

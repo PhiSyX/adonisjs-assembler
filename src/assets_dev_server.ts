@@ -128,6 +128,7 @@ export class AssetsDevServer {
      */
     this.#devServer = run(this.#cwd, {
       script: this.#options.cmd,
+      reject: true,
 
       /**
        * We do not inherit the stdio for vite and encore, because in

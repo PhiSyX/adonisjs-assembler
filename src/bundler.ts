@@ -113,6 +113,7 @@ export class Bundler {
       this.#logger.info('compiling frontend assets', { suffix: assetsBundler.cmd })
       await run(this.#cwd, {
         stdio: 'inherit',
+        reject: true,
         script: assetsBundler.cmd,
         scriptArgs: assetsBundler.args,
       })

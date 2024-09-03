@@ -228,6 +228,7 @@ export class TestRunner {
 
     this.#testScript = runNode(this.#cwd, {
       script: this.#scriptFile,
+      reject: true,
       env: { PORT: port, ...this.#options.env },
       nodeArgs: this.#options.nodeArgs,
       scriptArgs,
