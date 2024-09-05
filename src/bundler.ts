@@ -190,7 +190,7 @@ export class Bundler {
     `)
 
     await fs.writeFile(aceFileLocation, aceFileContent)
-    this.#logger.info('copied ace file', { suffix: this.#getRelativeName(aceFileLocation) })
+    this.#logger.info('created ace file', { suffix: this.#getRelativeName(aceFileLocation) })
   }
 
   /**
