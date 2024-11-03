@@ -126,6 +126,7 @@ export class DevServer {
   #isAdonisJSReadyMessage(message: unknown): message is {
     isAdonisJS: true
     environment: 'web'
+    protocol: string
     port: number
     host: string
     duration?: [number, number]
@@ -200,13 +201,14 @@ export class DevServer {
        * Handle AdonisJS ready message
        */
       if (this.#isAdonisJSReadyMessage(message)) {
+        const protocol = message.protocol
         const host = message.host === '0.0.0.0' ? '127.0.0.1' : message.host
 
         const displayMessage = ui
           .sticker()
           .useColors(this.#colors)
           .useRenderer(this.#logger.getRenderer())
-          .add(`Server address: ${this.#colors.cyan(`http://${host}:${message.port}`)}`)
+          .add(`Server address: ${this.#colors.cyan(`${protocol}://${host}:${message.port}`)}`)
 
         const watchMode = this.#options.hmr ? 'HMR' : this.#isWatching ? 'Legacy' : 'None'
         displayMessage.add(`Watch Mode: ${this.#colors.cyan(watchMode)}`)
